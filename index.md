@@ -3,7 +3,7 @@ layout: default
 title: Home
 ---
 
-<img src="/assets/profile.png" alt="Profile" class="profile">
+<img src="/assets/profile.jpg" alt="Profile" class="profile">
 
 <h1>Mohammad Sadra Shakouri</h1>
 <p class="subtitle">اَللّهُمَّ عَجِّل لِوَلیِّکَ الفَرَج</p>
