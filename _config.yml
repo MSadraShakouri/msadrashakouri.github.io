@@ -5,3 +5,6 @@ author: MSadraShakouri
 
 markdown: kramdown
 highlighter: rouge
+
+# This makes projects.md → /projects/
+permalink: /:title/
