@@ -1,0 +1,138 @@
+/* --- Repo Cards --- */
+.repo-card {
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    background: #ffffff;
+    transition: border-color 0.15s ease-in-out;
+    position: relative;
+}
+
+.repo-card:hover {
+    border-color: #0366d6;
+}
+
+/* --- Site Link Icon (Top-Right Corner) --- */
+.site-link {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    color: #586069;
+    opacity: 0.6;
+    transition: opacity 0.15s ease, color 0.15s ease;
+    text-decoration: none;
+}
+
+.site-link:hover {
+    color: #0366d6;
+    opacity: 1;
+}
+
+.site-link svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* --- Repo Header --- */
+.repo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-right: 1.75rem;
+}
+
+.repo-header h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.repo-header h3 a {
+    color: #0366d6;
+    text-decoration: none;
+}
+
+.repo-header h3 a:hover {
+    text-decoration: underline;
+}
+
+.repo-updated {
+    font-size: 0.75rem;
+    color: #586069;
+    white-space: nowrap;
+}
+
+/* --- Repo Description --- */
+.repo-description {
+    margin: 0.25rem 0 0.75rem 0;
+    font-size: 0.875rem;
+    color: #586069;
+    line-height: 1.5;
+}
+
+/* --- Repo Meta --- */
+.repo-meta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: 0.75rem;
+    color: #586069;
+}
+
+.language {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.language-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* --- Repo Footer --- */
+.repo-footer {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e1e4e8;
+    text-align: center;
+}
+
+.repo-footer a {
+    color: #0366d6;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.repo-footer a:hover {
+    text-decoration: underline;
+}
+
+/* --- Mobile --- */
+@media (max-width: 640px) {
+    .repo-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+        padding-right: 1.75rem;
+    }
+
+    .repo-updated {
+        white-space: normal;
+    }
+
+    .repo-card {
+        padding: 0.75rem 1rem;
+    }
+
+    .site-link {
+        top: 0.75rem;
+        right: 1rem;
+    }
+}
