@@ -12,7 +12,7 @@
   language_color: "#f1e05a"
   updated: 2026-08
   url: https://github.com/MSadraShakouri/anki-manual
-  site_url: https://msadrashakouri.github.io/anki-manual
+  site_url: https://msadrashakouri.ir/anki-manual
 
 - name: Lyric Sync
   description: A tool for synchronizing lyrics with audio files. Built with HTML, CSS, and JavaScript.
@@ -28,7 +28,7 @@
   language_color: "#e34c26"
   updated: 2026-08
   url: https://github.com/MSadraShakouri/piecework
-  site_url: https://msadrashakouri.github.io/piecework
+  site_url: https://msadrashakouri.ir/piecework
 
 - name: Jalali UI Dates
   description: A plugin for exteraGram and AyuGram that replaces Gregorian dates with Jalali (Persian) dates throughout the UI.
