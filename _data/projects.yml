@@ -4,7 +4,7 @@
   language_color: "#3572A5"
   updated: 2026-08
   url: https://github.com/MSadraShakouri/DailyDriver
-  site_url:
+  site_url: https://msadrashakouri.ir/DailyDriver
 
 - name: Anki Manual (Persian)
   description: Persian translation of the official Anki user manual. Contributed upstream to the Anki project.
