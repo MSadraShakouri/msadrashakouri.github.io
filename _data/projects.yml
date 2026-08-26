@@ -34,6 +34,6 @@
   description: A plugin for exteraGram and AyuGram that replaces Gregorian dates with Jalali (Persian) dates throughout the UI.
   language: Python
   language_color: "#3572A5"
-  updated: 2026-06
+  updated: 2026-08
   url: https://github.com/MSadraShakouri/Jalali-UI-Dates
   site_url:
