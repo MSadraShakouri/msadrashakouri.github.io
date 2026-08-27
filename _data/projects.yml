@@ -20,7 +20,7 @@
   language_color: "#e34c26"
   updated: 2026-08
   url: https://github.com/MSadraShakouri/lyric-sync
-  site_url:
+  site_url: https://msadrashakouri.ir/lyric-sync
 
 - name: Piecework — Jigsaw Studio
   description: A dependency-free, offline-first jigsaw puzzle PWA. Images stay on the device.
