@@ -608,12 +608,13 @@ a.fn-back {
 }
 
 /* ---------- Entrance (opening) ---------- */
-.opening > * {
+.opening-grid > * {
     animation: rise 0.8s both;
 }
 
-.opening > *:nth-child(2) { animation-delay: 0.12s; }
-.opening > *:nth-child(3) { animation-delay: 0.26s; }
+.opening-grid > *:nth-child(2) { animation-delay: 0.1s; }
+.opening-grid > *:nth-child(3) { animation-delay: 0.22s; }
+.opening-grid > *:nth-child(4) { animation-delay: 0.34s; }
 
 @keyframes rise {
     from { opacity: 0; transform: translateY(22px); }
@@ -649,35 +650,48 @@ a.fn-back {
         max-width: 1140px;
     }
 
-    /* Opening: headline on top, shifted left (same size). Below it the
-       Jamkaran plate sits LEFT in the same 360px column the chapter
-       plates use (mirrors movement 02), dua raised beside it. */
+    /* Opening: image LEFT (360px, same column as the chapter plates),
+       hero TOP RIGHT, dua MIDDLE RIGHT. The four children are placed on
+       a grid; on narrow screens they simply stack in DOM order. */
     .opening {
         text-align: left;
-    }
-
-    .opening-title {
-        margin-left: 0;
-        margin-right: auto;
-        max-width: 15em;
+        padding-top: 2.8rem;
     }
 
     .opening-grid {
         display: grid;
         grid-template-columns: 360px minmax(0, 1fr);
-        gap: 2rem 5rem;
-        align-items: center;
-        margin-top: 2.8rem;
+        grid-template-rows: auto auto 1fr;
+        gap: 0 5rem;
+        align-items: start;
+    }
+
+    .opening .eyebrow {
+        grid-column: 2;
+        grid-row: 1;
+        margin-bottom: 0.9rem;
+    }
+
+    .opening-title {
+        grid-column: 2;
+        grid-row: 2;
+        margin: 0;
+        max-width: 15em;
     }
 
     .opening .opening-plate {
+        grid-column: 1;
+        grid-row: 1 / span 3;
         max-width: 360px;
         margin: 0;
         justify-self: start;
     }
 
-    /* dua: bigger, centered in its column */
+    /* dua: vertically centered in the space below the hero */
     .opening-grid .invocation {
+        grid-column: 2;
+        grid-row: 3;
+        align-self: center;
         margin-top: 0;
     }
 

@@ -4,10 +4,10 @@ title: Home
 ---
 
 <section class="opening">
+    <div class="opening-grid">
     <p class="eyebrow">A reflection</p>
     <h1 class="opening-title">What if the savior of the world <em>is already here</em> &mdash; but we cannot see him?</h1>
 
-    <div class="opening-grid">
         <div class="plate opening-plate">
             <figure class="fade-figure" data-parallax>
                 <img src="/assets/mahdi/00-jamkaran.jpg" alt="The turquoise dome and minarets of the Jamkaran Mosque under a soft dusk sky" fetchpriority="high">
