@@ -341,20 +341,18 @@ h1 {
 }
 
 /* Drop caps.
-   Layered per current browser reality (Firefox has no initial-letter):
-   1. Base: tuned float approximation (also the no-JS fallback).
-   2. @supports initial-letter: native two-line cap (Safari, Chrome 133+).
-   3. Browsers with neither: main.js measures real font metrics and
-      positions a floated box (html.dcjs) — the ::first-letter styles are
-      neutralized there so they don't fight the measured span. */
+   Firefox ships no CSS initial-letter (still true today), so the base is
+   the hand-tuned float (the recipe that rendered correctly on the
+   author's Firefox devices); browsers with initial-letter (Chrome 133+,
+   Safari, Edge) upgrade to the native two-line cap via @supports. */
 .essay-section > p:first-of-type::first-letter {
     font-family: var(--font-display);
     font-weight: 700;
     color: var(--accent);
     float: left;
-    font-size: 5.1em;
-    line-height: 0.72;
-    padding: 0.05em 0.13em 0 0;
+    font-size: 3.85em;
+    line-height: 0.78;
+    padding: 0.04em 0.16em 0 0;
 }
 
 @supports (initial-letter: 2) or (-webkit-initial-letter: 2) {
@@ -367,43 +365,6 @@ h1 {
         -webkit-initial-letter: 2;
         initial-letter: 2;
     }
-}
-
-.dcjs .essay-section > p:first-of-type::first-letter {
-    float: none;
-    font-size: inherit;
-    line-height: inherit;
-    font-family: inherit;
-    font-weight: inherit;
-    color: inherit;
-    padding: 0;
-    margin: 0;
-}
-
-.drop-cap {
-    float: left;
-    position: relative;
-    margin-right: 0.16em;
-}
-
-.dc-glyph {
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-family: var(--font-display);
-    font-weight: 700;
-    line-height: normal;
-    color: var(--accent);
-}
-
-.dc-fallback {
-    float: left;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 5.1em;
-    line-height: 0.72;
-    padding: 0.05em 0.13em 0 0;
-    color: var(--accent);
 }
 
 .big-question {
@@ -688,20 +649,31 @@ a.fn-back {
         max-width: 1140px;
     }
 
-    /* Opening: headline stays on top, full width. Below it the Jamkaran
-       plate sits LEFT and the dua is raised beside it on the RIGHT. */
+    /* Opening: headline on top, shifted left (same size). Below it the
+       Jamkaran plate sits LEFT in the same 360px column the chapter
+       plates use (mirrors movement 02), dua raised beside it. */
+    .opening {
+        text-align: left;
+    }
+
+    .opening-title {
+        margin-left: 0;
+        margin-right: auto;
+        max-width: 15em;
+    }
+
     .opening-grid {
         display: grid;
-        grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-        gap: 2rem 4rem;
+        grid-template-columns: 360px minmax(0, 1fr);
+        gap: 2rem 5rem;
         align-items: center;
-        margin-top: 2.6rem;
+        margin-top: 2.8rem;
     }
 
     .opening .opening-plate {
-        max-width: 540px;
+        max-width: 360px;
         margin: 0;
-        justify-self: end;
+        justify-self: start;
     }
 
     /* dua: bigger, centered in its column */
@@ -789,16 +761,6 @@ a.fn-back {
         opacity: 1;
         transform: none;
         transition: none;
-    }
-}
-
-@media (min-width: 1020px) and (max-height: 840px) {
-    .opening-grid {
-        grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-    }
-
-    .opening .opening-plate {
-        max-width: 460px;
     }
 }
 
