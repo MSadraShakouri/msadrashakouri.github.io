@@ -97,24 +97,41 @@
         parallaxUpdate();
     }
 
-    /* ---------- Drop caps (measured — identical on every device) ----------
-       The rule: the cap spans exactly two lines — its top aligns with the
-       cap height of line 1 and its baseline rests on line 2's baseline.
-       CSS initial-letter does this natively but is missing on some mobile
-       browsers, so we measure real font metrics (canvas) and position a
-       floated box ourselves. Falls back to a tuned float if the Canvas
-       text-metrics API is unavailable. */
+    /* ---------- Drop caps ----------
+       Browsers with CSS initial-letter (Safari, Chrome 133+, Edge) get the
+       native two-line cap from the stylesheet — we do nothing there.
+       Everywhere else (notably Firefox, which still ships no initial-letter)
+       we measure real font metrics and position a floated box so the cap
+       spans exactly two lines: cap-top on line 1, baseline on line 2.
+       Measuring happens only AFTER "Playfair Display" 700 is actually
+       loaded (canvas silently falls back to Georgia otherwise), and every
+       metric is sanity-checked — anything fishy degrades to a tuned float.
+       Fixes the two bugs of the previous engine: glyph offset (line-height 1
+       vs normal baseline math) and the webfont measuring race. */
     var capResizeTimer = null;
 
+    function supportsInitialLetter() {
+        try {
+            return !!(window.CSS && window.CSS.supports &&
+                (window.CSS.supports('initial-letter', '2') ||
+                 window.CSS.supports('-webkit-initial-letter', '2')));
+        } catch (e) {
+            return false;
+        }
+    }
+
     function setupDropCaps() {
+        if (supportsInitialLetter()) return;
+
         var paras = Array.prototype.slice.call(
             doc.querySelectorAll('.essay-section > p:first-of-type'));
         if (!paras.length) return;
 
+        doc.documentElement.classList.add('dcjs');
+
         function ensureSpan(p) {
             var existing = p.querySelector('.drop-cap');
             if (existing) {
-                // a fallback span (plain letter) cannot be re-measured
                 return existing.querySelector('.dc-glyph') ? existing : null;
             }
             var node = p.firstChild;
@@ -136,6 +153,14 @@
             var glyph = span.querySelector('.dc-glyph');
             span.textContent = glyph ? glyph.textContent : span.textContent;
             span.className = 'drop-cap dc-fallback';
+            span.removeAttribute('style');
+        }
+
+        function finite() {
+            for (var i = 0; i < arguments.length; i++) {
+                if (!isFinite(arguments[i]) || arguments[i] <= 0) return false;
+            }
+            return true;
         }
 
         function layout() {
@@ -144,15 +169,19 @@
                 var span = ensureSpan(p);
                 if (!span) return;
 
-                span.removeAttribute('style');
                 var glyph = span.querySelector('.dc-glyph');
                 if (!glyph) return;
+
+                span.className = 'drop-cap';
+                span.removeAttribute('style');
                 glyph.removeAttribute('style');
 
                 var cs = window.getComputedStyle(p);
-                var fs = parseFloat(cs.fontSize) || 16;
+                var fs = parseFloat(cs.fontSize);
+                if (!finite(fs)) { fallback(span); return; }
+
                 var lh = parseFloat(cs.lineHeight);
-                if (!lh || isNaN(lh)) lh = fs * 1.8;
+                if (!finite(lh) || lh < fs) lh = fs * 1.8;
 
                 if (!ctx) ctx = doc.createElement('canvas').getContext('2d');
 
@@ -169,7 +198,8 @@
                 var capH = mc.actualBoundingBoxAscent;
                 var capW = mc.width;
 
-                if (!bodyAsc || !bodyDesc || !bodyCap || !capAsc || !capH || !capW) {
+                if (!finite(bodyAsc, bodyDesc, bodyCap, capAsc, capH, capW) ||
+                    bodyAsc + bodyDesc > lh * 1.6) {
                     fallback(span);
                     return;
                 }
@@ -178,23 +208,40 @@
                 var baseline1 = halfLead + bodyAsc;
                 var baseline2 = baseline1 + lh;
                 var line1CapTop = baseline1 - bodyCap;
-                var target = baseline2 - line1CapTop;      // cap-height span
-                var F = target / (capH / 100);             // Playfair font size
+                var target = baseline2 - line1CapTop;   // wanted cap height (px)
+                var F = target / (capH / 100);          // Playfair font size (px)
 
-                span.style.width = Math.ceil((capW / 100) * F) + 'px';
+                if (!finite(target, F) || F < 2 * fs || F > 9 * fs) {
+                    fallback(span);
+                    return;
+                }
+
+                // glyph uses line-height normal: its baseline sits one
+                // ascent below the box top — that's the real alignment rule
+                var glyphTop = baseline2 - (capAsc / 100) * F;
+
+                span.style.width = Math.ceil((capW / 100) * F + 1) + 'px';
                 span.style.height = Math.ceil(2 * lh) + 'px';
-                glyph.style.fontSize = Math.round(F) + 'px';
-                glyph.style.top = Math.round(baseline2 - (capAsc / 100) * F) + 'px';
+                glyph.style.fontSize = F.toFixed(1) + 'px';
+                glyph.style.top = Math.round(glyphTop) + 'px';
             });
         }
 
-        layout();
-        if (doc.fonts && doc.fonts.ready) {
-            doc.fonts.ready.then(function () { layout(); }).catch(function () {});
+        var run = function () { layout(); };
+
+        if (doc.fonts && doc.fonts.load) {
+            // force-load the cap font first; only then measure
+            doc.fonts.load('700 100px "Playfair Display"').then(run, run);
+            if (doc.fonts.ready) {
+                doc.fonts.ready.then(run).catch(function () {});
+            }
+        } else {
+            run();
         }
+
         window.addEventListener('resize', function () {
             window.clearTimeout(capResizeTimer);
-            capResizeTimer = window.setTimeout(layout, 150);
+            capResizeTimer = window.setTimeout(run, 150);
         });
     }
 

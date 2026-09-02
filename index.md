@@ -4,24 +4,22 @@ title: Home
 ---
 
 <section class="opening">
-    <div class="opening-grid">
-        <div class="opening-head">
-            <p class="eyebrow">A reflection</p>
-            <h1 class="opening-title">What if the savior of the world <em>is already here</em> &mdash; but we cannot see him?</h1>
-        </div>
+    <p class="eyebrow">A reflection</p>
+    <h1 class="opening-title">What if the savior of the world <em>is already here</em> &mdash; but we cannot see him?</h1>
 
+    <div class="opening-grid">
         <div class="plate opening-plate">
             <figure class="fade-figure" data-parallax>
                 <img src="/assets/mahdi/00-jamkaran.jpg" alt="The turquoise dome and minarets of the Jamkaran Mosque under a soft dusk sky" fetchpriority="high">
             </figure>
             <p class="figure-caption">Jamkaran Mosque &mdash; Qom, Iran</p>
         </div>
-    </div>
 
-    <div class="invocation">
-        <p class="arabic" dir="rtl" lang="ar">اَللّهُمَّ عَجِّل لِوَلیِّکَ الفَرَج</p>
+        <div class="invocation">
+            <p class="arabic" dir="rtl" lang="ar">اَللّهُمَّ عَجِّل لِوَلیِّکَ الفَرَج</p>
         <p class="translit">Allahumma 'ajjil li-waliyyikal-faraj</p>
-        <p class="meaning">O God, hasten the relief of Your representative.</p>
+            <p class="meaning">O God, hasten the relief of Your representative.</p>
+        </div>
     </div>
 </section>
 
