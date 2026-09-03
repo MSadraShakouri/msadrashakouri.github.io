@@ -7,15 +7,34 @@
     var reducedMotion = window.matchMedia &&
         window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    /* ---------- Reading progress bar ---------- */
+    /* ---------- Reading progress bar ----------
+       Blog.google-style: the fill sits just below the sticky header,
+       is a touch thicker, and only appears while scrolling downward.
+       When you scroll up it slides away. */
     var bar = doc.querySelector('.progress-bar');
+    var lastY = null;
 
     function updateProgress() {
         if (!bar) return;
         var el = doc.documentElement;
         var max = el.scrollHeight - el.clientHeight;
         var y = window.pageYOffset || el.scrollTop;
-        bar.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+        var p = max > 0 ? (y / max) * 100 : 0;
+        if (p < 0) p = 0;
+        if (p > 100) p = 100;
+        bar.style.width = p + '%';
+
+        if (lastY === null) {
+            lastY = y;
+            return;
+        }
+        // Show while going down, tuck away while going up.
+        if (y > lastY + 2) {
+            bar.classList.add('is-visible');
+        } else if (y < lastY - 2) {
+            bar.classList.remove('is-visible');
+        }
+        lastY = y;
     }
 
     /* ---------- Reveals ----------
