@@ -21,7 +21,7 @@
     --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
     --font-body: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif;
     --font-arabic: 'Amiri', 'Vazirmatn', 'Traditional Arabic', serif;
-    --header-h: 60px;
+    --header-h: 64px;
 }
 
 * {
@@ -52,15 +52,18 @@ body {
 }
 
 /* ---------- Reading progress ----------
-   Sits just below the sticky header, thicker than before, and only
-   visible while scrolling down (toggled by main.js via .is-visible). */
+   Lives at the bottom edge of the sticky header (it's a child of
+   .site-header), filling the header's bottom border as you scroll down.
+   The header is a touch taller to make room for it. Toggled by main.js
+   via .is-visible so it only shows while scrolling down. */
 .progress-bar {
-    position: fixed;
-    top: calc(var(--header-h) + 1px); /* under the header + its bottom border */
+    position: absolute;
     left: 0;
-    height: 6px;
+    right: 0;
+    bottom: -1px; /* overlaps the header's border-bottom line */
+    height: 4px;
     width: 0;
-    z-index: 100;
+    z-index: 2;
     background: linear-gradient(90deg, var(--accent), var(--accent-bright));
     opacity: 0;
     pointer-events: none;
