@@ -51,16 +51,24 @@ body {
     color: var(--night);
 }
 
-/* ---------- Reading progress ---------- */
+/* ---------- Reading progress ----------
+   Sits just below the sticky header, thicker than before, and only
+   visible while scrolling down (toggled by main.js via .is-visible). */
 .progress-bar {
     position: fixed;
-    top: 0;
+    top: calc(var(--header-h) + 1px); /* under the header + its bottom border */
     left: 0;
-    height: 3px;
+    height: 6px;
     width: 0;
     z-index: 100;
     background: linear-gradient(90deg, var(--accent), var(--accent-bright));
-    transition: width 0.08s linear;
+    opacity: 0;
+    pointer-events: none;
+    transition: width 0.08s linear, opacity 0.2s ease;
+}
+
+.progress-bar.is-visible {
+    opacity: 1;
 }
 
 /* ---------- Compact site header (shared by all pages) ---------- */
