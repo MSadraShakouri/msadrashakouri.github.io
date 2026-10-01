@@ -2,38 +2,70 @@
   description: Personal terminal-based life tracker for journaling, prayer tracking, and data analysis. Built with Python and SQLite.
   language: Python
   language_color: "#3572A5"
-  updated: 2026-08
+  updated: 2026-10
   url: https://github.com/MSadraShakouri/DailyDriver
   site_url: https://msadrashakouri.ir/DailyDriver
+
+- name: Satr
+  description: An Android Markdown editor for Persian and English notes, with live preview, math rendering, and PDF export.
+  language: TypeScript
+  language_color: "#3178c6"
+  updated: 2026-10
+  url: https://github.com/MSadraShakouri/satr
+  site_url:
 
 - name: Anki Manual (Persian)
   description: Persian translation of the official Anki user manual. Contributed upstream to the Anki project.
   language: JavaScript
   language_color: "#f1e05a"
-  updated: 2026-08
+  updated: 2026-09
   url: https://github.com/MSadraShakouri/anki-manual
   site_url: https://msadrashakouri.ir/anki-manual
 
 - name: Lyric Sync
   description: A tool for synchronizing lyrics with audio files. Built with HTML, CSS, and JavaScript.
-  language: HTML
-  language_color: "#e34c26"
-  updated: 2026-08
+  language: JavaScript
+  language_color: "#f1e05a"
+  updated: 2026-09
   url: https://github.com/MSadraShakouri/lyric-sync
   site_url: https://msadrashakouri.ir/lyric-sync
 
 - name: Piecework — Jigsaw Studio
   description: A dependency-free, offline-first jigsaw puzzle PWA. Images stay on the device.
-  language: HTML
-  language_color: "#e34c26"
+  language: JavaScript
+  language_color: "#f1e05a"
   updated: 2026-08
   url: https://github.com/MSadraShakouri/piecework
   site_url: https://msadrashakouri.ir/piecework
+
+- name: Insight
+  description: A word-guessing party game where friends guess each other's preferences. Supports English and Persian.
+  language: JavaScript
+  language_color: "#f1e05a"
+  updated: 2026-10
+  url: https://github.com/MSadraShakouri/insight
+  site_url: https://msadrashakouri.ir/insight
 
 - name: Jalali UI Dates
   description: A plugin for exteraGram and AyuGram that replaces Gregorian dates with Jalali (Persian) dates throughout the UI.
   language: Python
   language_color: "#3572A5"
-  updated: 2026-08
-  url: https://github.com/MSadraShakouri/Jalali-UI-Dates
+  updated: 2026-10
+  url: https://github.com/MSadraShakouri/jalali-ui-dates
   site_url:
+
+- name: md2docx
+  description: A Python tool for converting Markdown into styled Word documents, with Persian and English support, footnotes, and batch conversion.
+  language: Python
+  language_color: "#3572A5"
+  updated: 2026-08
+  url: https://github.com/MSadraShakouri/md2docx
+  site_url:
+
+- name: Markdown Editor
+  description: A browser-based Markdown editor for GitHub repositories, with Persian RTL support, live preview, and direct commits.
+  language: JavaScript
+  language_color: "#f1e05a"
+  updated: 2026-09
+  url: https://github.com/MSadraShakouri/markdown-editor
+  site_url: https://msadrashakouri.ir/markdown-editor
